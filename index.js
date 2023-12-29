@@ -15,9 +15,6 @@ ejs.closeDelimiter='}'
 app.set('view engine', 'ejs')
 app.set('views', './views')
 
-// Handlebars Template configurations
-// const {engine} = require('express-handlebars')
-// app.engine('hbs', engine())
 
 // Middlewares
 require('express-async-errors')
