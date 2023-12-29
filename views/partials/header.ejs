@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>{%=docTitle%}</title>
+</head>
+
+<body>
+    <div class="container " >
+        {% if(errorMessage) { %}
+        <div class="alert alert-danger " id="notification">
+            {%= errorMessage %}
+        </div>
+        {% } if(successMessage) { %}
+        <div class="alert alert-success " id="notification">
+            {%= successMessage%}
+        </div>
+    {% } %}
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a href="/" class="navbar-brand">Blog App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#my-navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="my-navbar" class="collapse navbar-collapse">
+                <div class="navbar-nav ms-auto">
+                    <!-- i do that because, when user login, on the header will be seeing only logout, not login anymore -->
+                    <!-- and i can get this user because of middaleware i have created in index.js
+                    which is app.use((req, res, next)=>{
+
+                    res.locals.errorMessage = req.flash('error');
+                    res.locals.successMessage = req.flash('success');
+                    res.locals.user = req.session.user || null
+                    next()
+                }) -->
+                    {% if(user) { %}
+                    <a class="nav-link btn btn-warning btn-sm text-dark mx-2" href="/auth/logout">Logout</a>
+                    {% } else { %}
+
+                    <a class="nav-link btn btn-warning btn-sm text-dark mx-2" href="/auth/login">Login</a>
+                    <a class="nav-link btn btn-warning btn-sm text-dark mx-2" href="/auth/register">Sign-up</a>
+                    {% } %}
+                   
+                </div>
+            </div>
+
+
+        </div>
+
+    </nav>
+<script>
+    const notification = document.querySelectorAll('#notification')
+    notification.forEach(not => {
+        setTimeout(()=>{
+            not.remove();
+        },3000)
+        
+    });
+</script>
+</body>

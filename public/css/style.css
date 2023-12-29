@@ -1,0 +1,25 @@
+/* *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+} */
+
+#notification{
+    position:fixed;
+    top:50px;
+    right:10px;
+   
+}
+
+a{
+    text-decoration: none;
+    color: #333;
+}
+.alert{
+    padding:0;
+    
+
+}
+.no-border {
+    border: none !important;
+  }

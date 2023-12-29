@@ -1,0 +1,60 @@
+{%- include('../partials/Header') %}
+
+<!-- Categories -->
+<div class=" nav-scorller py-1 mb-3 border-bottom container mt-5  mb-5">
+    <nav class="nav nav-underline justify-content-between">
+        <!-- need to look for the filer logic ? -->
+        {% for(let category of categories){ %}
+            <a class="nav-item nav-link" href="/post?filter[categoryId]={%=category._id %}"> {%=category.name %}</a>
+        {% } %}
+    </nav>
+</div>
+<!-- Container -->
+<div class="container  ">
+    <div class="row g-5">
+        {% if(user) { %}
+            <div class="text-end">
+                <a href="/post/create" class="btn btn-primary mx-2"> New Post</a>
+                <a href="/category/create" class="btn btn-warning mx-2"> New Category</a>
+            </div>
+        {% } %}
+
+        <!-- Blog Posts -->
+        {% if (posts && posts.length > 0) { %}
+            <!-- Display posts if there are any -->
+            <h2>Welcome to your page!</h2>
+            <div class=" grid gap-4 row mt-5 ">
+                {% for(let post of posts) { %}
+                <div class=" position-relative col-12 col-md-6 col-lg-4 col-xl-3 p-0 border border-under" >
+                  <a class="card  no-border " href="/post/{%=post._id%}">
+                        <img src="{%=post.image%}" class="card-img-top  border-bottom " alt="post image" style="max-height: 200px;">
+                        <div class='card-body no-border' >
+                          <h5 class="card-title">{%=post.title%}</h5>
+                          <div class="text-center">
+                          <small class="text-center mb-3 fst-italic mb-3"><b>Published on :</b>{%=post.createdAt.toLocaleDateString()%}</small><br/>
+                          <small class=" text-center mb-3 fst-italic mb-3"><b>Created by:</b>{%=post.userId.email%}</small>
+                        </div>
+                          <p class="card-text">{%=post.content%}</p>
+                          <!-- we just let see "edit and delete button "the user who created the post,
+                        other users can not delete or add, if he hasn't created teh post -->
+                          {% if( user?._id == post.userId._id)  { %}
+                          <div class="text-center">
+                            <a href="/post/edit/{%=post._id%}" class="btn btn-warning mx-2">Edit</a>
+                            <a href="/post/delete/{%=post._id%}" class="btn btn-danger mx-2">Delete</a>
+                          </div>
+                          {% } %}
+                          <h6><span class="badge bg-primary position-absolute top-0 end-0 ">{%=post.categoryId.name%}</span></h6>
+                        </div>
+                      </a>
+                </div>
+              
+                {% } %}
+            </div>
+        {% } else { %}
+            <!-- Display a message if no posts -->
+            <h2>No posts yet! Add one.</h2>
+        {% } %}
+   
+  </div>
+       
+</div>

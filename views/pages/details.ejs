@@ -1,0 +1,24 @@
+{%- include('../partials/Header') %}
+<div>
+    <div class="card" style="width: full;">
+        <img src="{%=post.image%}" class="card-img-top" alt="post image">
+        <div class="card-body">
+          <h5 class="card-title">{%=post.title%}</h5>
+          <div class="text-center">
+            <small><b>Published on :</b>{%=post.createdAt.toLocaleDateString()%}</small></br>
+            <small><b>Created by : </b>{%=userId.email%}</small>
+            <!-- user.emal and userId.email are same user iscoming from index file to stre in locals, i can use it in "view" -->
+            <!-- <small><b>User: </b>{%=user.email%}</small> -->
+
+          </div>
+          <p class="card-text">{%=post.content%}</p>
+          <a href="#" class="btn btn-primary" onclick="history.back()">BACK</a>
+        </div>
+        {% if(user && userId._id==user._id) { %}
+        <div class="text-center">
+            <a href="/post/edit/{%=post._id%}" class="btn btn-warning mx-2"> EDIT </a>
+            <a href="/post/delete/{%=post._id%}" class="btn btn-danger mx-2"> DELETE </a>
+          </div>
+        {% } %}
+      </div>
+</div>
