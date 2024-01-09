@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 require('colors')
 require('dotenv').config();
+// const multer = require('multer');
 
 // Configrations 
 const PORT = process.env.PORT||8080;
@@ -15,7 +16,8 @@ ejs.closeDelimiter='}'
 app.set('view engine', 'ejs')
 app.set('views', './views')
 
-
+// set static folder 
+app.use(express.static(path.join(__dirname, 'public')))
 // Middlewares
 require('express-async-errors')
 app.use('/css', express.static('public/css'))
