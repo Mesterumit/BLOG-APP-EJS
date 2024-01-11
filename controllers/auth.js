@@ -51,11 +51,11 @@ exports.getRegister = (req, res) => {
 exports.postRegister = async (req, res) => {
 //   console.log("post register")
   
-const {email,password,password2,name} = req.body
+const {email,password,password2} = req.body
 //    Check the inputs
   if (!email || !password || !password2) {
     // req.flash("error", "Email & Password are required!");
-    // return res.redirect("/auth/register");
+    return res.redirect("/auth/register");
 
     throw new Error('Email & Password are required!')
     
@@ -74,10 +74,8 @@ const {email,password,password2,name} = req.body
     return res.redirect("/auth/register");
   }
 
-  // in here , we hav added name to user
-  // but we dont have the name property in user model
-  // so look for this logic
-  await User.create({email,password,name});
+  
+  await User.create({email,password});
   req.flash("success", "Signed up successfully!");
   res.redirect("/auth/login");
 };

@@ -4,7 +4,7 @@ const User = require('../models/User');
 
 exports.getPosts = async(req,res)=>{
     let categories = await Category.find()
-    let posts = await Post.find({ userId: req.session.user }).populate(['userId','categoryId'])
+    // let posts = await Post.find({ userId: req.session.user }).populate(['userId','categoryId'])
     const recentPosts = await Post.find().sort({createdAt:'desc'}).limit(3)
     res.render('pages/Home', {categories,posts:res.results,recentPosts, docTitle:'Home page'})
 }

@@ -29,7 +29,7 @@ const postSchema = Schema({
     },
     image:{
         type:String,
-        default:'/images/no-photo.jpg'
+        default:'/imgs/no-photo.jpg'
 
     }
 },{timestamps:true})

@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 require('colors')
 require('dotenv').config();
+const path = require('path')
 // const multer = require('multer');
 
 // Configrations 
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 require('express-async-errors')
 app.use('/css', express.static('public/css'))
 app.use('/images', express.static('public/imgs'))
+//setting cookie to session
 const session = require('cookie-session')
 app.use(session({secret:process.env.SESSION_SECRET || 'secret_key_for_Auth'}))
 // connect flash 
