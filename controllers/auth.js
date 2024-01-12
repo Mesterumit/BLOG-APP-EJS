@@ -3,7 +3,7 @@ const User = require('../models/User')
 // @url     GET /auth/login
 exports.getLogin = (req, res) => {
 
-  res.render("pages/login", { docTitle: "Login"});
+  res.render("pages/Login", { docTitle: "Login"});
 };
 
 // @url     POST /auth/login
